@@ -1,0 +1,25 @@
+name: check-compiles
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        luaVersion:
+          - "5.1.5"
+          - "5.2.4"
+          - "5.3.6"
+          - "5.4.4"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: leafo/gh-actions-lua@v8
+        with:
+          luaVersion: ${{ matrix.luaVersion }}
+      - uses: leafo/gh-actions-luarocks@v4
+      - run: luarocks make CFLAGS="-Wall -Wextra -O2 -fPIC"
+      - run: lua -e 'print(require("tigr"))'
+

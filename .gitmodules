@@ -1,0 +1,9 @@
+[submodule "compat-5.3"]
+	path = compat-5.3
+	url = https://github.com/lunarmodules/lua-compat-5.3
+[submodule "moon"]
+	path = moon
+	url = https://github.com/siffiejoe/lua-moon
+[submodule "tigr"]
+	path = tigr
+	url = https://github.com/erkkah/tigr

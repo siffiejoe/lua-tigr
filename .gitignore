@@ -1,0 +1,29 @@
+# local files for remembering stuff
+HISTO
+TODO
+
+# temporary files
+.*.swp
+*.log
+
+# object files
+*.o
+*.obj
+
+# libraries
+*.so
+*.dll
+*.a
+*.lib
+*.exp
+*.def
+
+# executables
+*.exe
+
+# precompiled Lua bytecode files
+*.luac
+
+# LuaRocks packages
+*.rock
+
