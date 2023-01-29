@@ -20,6 +20,7 @@ jobs:
         with:
           luaVersion: ${{ matrix.luaVersion }}
       - uses: leafo/gh-actions-luarocks@v4
+      - run: apt-get install x11proto-dev libgl-dev libglx-dev
       - run: luarocks make CFLAGS="-Wall -Wextra -O2 -fPIC"
       - run: lua -e 'print(require("tigr"))'
 
