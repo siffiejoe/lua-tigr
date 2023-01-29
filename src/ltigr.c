@@ -555,7 +555,7 @@ static int ltigr_touch( lua_State* L )
   Tigr* window = moon_checkobject( L, 1, "tigrWindow" );
   TigrTouchPoint points[ 10 ];
   int i = 0;
-  int num = tigrTouch( window, points, sizeof( points )/sizeof( *points ));
+  int num = tigrTouch( window, points, sizeof( points )/sizeof( *points ) );
   lua_createtable( L, num, 0 );
   for ( i = 0; i < num; ++i )
   {
