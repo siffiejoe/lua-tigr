@@ -29,12 +29,12 @@ static inline uint8_t p2g( uint32_t p )
 
 static inline uint8_t p2b( uint32_t p )
 {
-  return (p >> 8) & 0xFFu;
+  return (p >> 16) & 0xFFu;
 }
 
 static inline uint8_t p2a( uint32_t p )
 {
-  return (p >> 8) & 0xFFu;
+  return (p >> 24) & 0xFFu;
 }
 
 static inline TPixel p2tp( uint32_t p ) /* pixel to Tigr pixel */
