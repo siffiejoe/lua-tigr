@@ -10,8 +10,8 @@ description = {
   homepage = "https://github.com/siffiejoe/lua-tigr/",
   license = "MIT",
 }
--- TODO: figure out build instructions for windows and macosx
-supported_platforms = { "linux" }
+-- TODO: figure out build instructions for macosx
+supported_platforms = { "linux", "windows" }
 dependencies = {
   "lua >= 5.1, < 5.5",
   "luarocks-fetch-gitrec",
