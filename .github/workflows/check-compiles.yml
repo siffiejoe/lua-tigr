@@ -9,20 +9,26 @@ jobs:
       fail-fast: false
       matrix:
         luaVersion:
-          - "5.1.5"
-          - "5.2.4"
-          - "5.3.6"
+          - "5.1"
+          - "5.2"
+          - "5.3"
           - "5.4.4"
-    runs-on: ubuntu-latest
+        osVersion:
+          - "ubuntu-latest"
+          - "windows-latest"
+    runs-on: ${{ matrix.osVersion }}
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - uses: leafo/gh-actions-lua@v8
+      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: leafo/gh-actions-lua@v10
         with:
           luaVersion: ${{ matrix.luaVersion }}
-      - uses: leafo/gh-actions-luarocks@v4
+          buildCache: false
+      - uses: hishamhm/gh-actions-luarocks@master
       - run: sudo apt-get install x11proto-dev libgl-dev libglx-dev libglu1-mesa-dev
-      - run: luarocks make CFLAGS="-Wall -Wextra -O2 -fPIC"
+        if: ${{ matrix.osVersion == 'ubuntu-latest' }}
+      - run: luarocks make
       - run: lua -e 'print(require("tigr"))'
 
