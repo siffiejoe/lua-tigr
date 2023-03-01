@@ -5,6 +5,7 @@ TODO
 # temporary files
 .*.swp
 *.log
+.luarocks.patches.applied
 
 # object files
 *.o

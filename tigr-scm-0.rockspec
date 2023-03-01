@@ -10,8 +10,8 @@ description = {
   homepage = "https://github.com/siffiejoe/lua-tigr/",
   license = "MIT",
 }
--- TODO: figure out build instructions for windows and macosx
-supported_platforms = { "linux" }
+-- TODO: figure out build instructions for macosx
+supported_platforms = { "linux", "windows" }
 dependencies = {
   "lua >= 5.1, < 5.5",
   "luarocks-fetch-gitrec",
@@ -82,6 +82,45 @@ build = {
             "gdi32",
           },
         },
+      },
+      patches = {
+        ["remove-winmain.diff"] = [==[
+diff -Naur old/tigr/tigr.c new/tigr/tigr.c
+--- old/tigr/tigr.c	2023-02-03 18:08:58.881163919 +0100
++++ new/tigr/tigr.c	2023-02-03 18:09:28.610295470 +0100
+@@ -2609,31 +2609,6 @@
+     win->lastChar = 0;
+     return c;
+ }
+-
+-// We supply our own WinMain and just chain through to the user's
+-// real entry point.
+-#ifdef UNICODE
+-int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
+-#else
+-int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+-#endif
+-{
+-    int n, argc;
+-    LPWSTR* wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
+-    char** argv = (char**)calloc(argc + 1, sizeof(int));
+-
+-    (void)hInstance;
+-    (void)hPrevInstance;
+-    (void)lpCmdLine;
+-    (void)nCmdShow;
+-
+-    for (n = 0; n < argc; n++) {
+-        int len = WideCharToMultiByte(CP_UTF8, 0, wargv[n], -1, 0, 0, NULL, NULL);
+-        argv[n] = (char*)malloc(len);
+-        WideCharToMultiByte(CP_UTF8, 0, wargv[n], -1, argv[n], len, NULL, NULL);
+-    }
+-    return main(argc, argv);
+-}
+ #endif
+ 
+ //////// End of inlined file: tigr_win.c ////////
+]==]
       },
     },
   },
