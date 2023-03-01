@@ -64,6 +64,7 @@ static char const* const ltigr_window_option_names[] = {
   "retina",
   "nocursor",
   "fullscreen",
+  NULL
 };
 
 static int const ltigr_window_option_values[] = {
@@ -81,6 +82,7 @@ static int const ltigr_window_option_values[] = {
 static char const* const ltigr_blitmode_names[] = {
   "keep_alpha",
   "blend_alpha",
+  NULL
 };
 
 static enum TIGRBlitMode const ltigr_blitmode_values[] = {
